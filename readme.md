@@ -1,10 +1,10 @@
 # introduction to Prompting Hospital system
 a system to process excel file containing of 5 sheets including information on 
-physicians, schedules, and pricelists. The system's role will be to answer user inquiries using RAG, such as the schedule of a specific doctor, the most appropriate doctor or specialty based on the question, the price of a specific service, or retrieving metadata about the hospital. 
+physicians, schedules, and pricelists. The system will answer user inquiries using RAG, such as the schedule of a specific doctor, the most appropriate doctor or specialty based on the question, the price of a specific service, or retrieving metadata about the hospital. 
 
 our system consist of streamlit app that connects to rag-API
 
-# Get started :: requirements
+# Get started:: requirements
 all modules required are in requirements.txt
 ```
 pandas
@@ -12,7 +12,6 @@ openpyxl
 openai
 flask
 sqlite3
-os
 chromadb
 streamlit
 requests
@@ -20,7 +19,6 @@ requests
 
 # utils functions
 ```bash
-│
 ├───API
 │   │   physician-API.py
 │   │   policy-API.py
@@ -33,32 +31,17 @@ requests
 │   │       Physicians-insert.html
 │   │       Policy-insert.html
 │   │       Pricelist-insert.html
-│   │       rag-home.html
 │   │       Schedules-insert.html
 │   │       Specialities-insert.html
 │   │
 │   └───utils
 │       │   process_data.py
-│       │   rag.py
-│       │
-│       └───__pycache__
-│               process_data.cpython-312.pyc
-│               process_data.cpython-313.pyc
-│               rag.cpython-313.pyc
-│               __init__.cpython-313.pyc
-│
-├───chroma
-│   │   chroma.sqlite3
-│   │
-│   └───95196828-3b20-4b76-b0b0-17ce39a48d9d
-│           data_level0.bin
-│           header.bin
-│           length.bin
-│           link_lists.bin
+│       └───rag.py
+│      
 │
 ├───data
 │       Xyris HIS_data.xlsx
-│       Xyris.db
+└───────Xyris.db
 ```
 there's 2 scripts in utils folder in the API folder (to make it accessible for APIs)
 ### first one:: process_data.py
@@ -89,25 +72,33 @@ ids: ids of data
   collection: vector database  
   query: user's prompt  
   k: number of documents to retrieve from
-2. get_context_combined(results): combine all results that matched query
+2. get_context_combined(results): combine all results that matched the query
 3. get_prompt(context, query): Generate a prompt combining context and query
 4. generate_response(query, context): Generate a response using OpenAI
-5. rag_query(collection, query, n_chunks = 2): Perform RAG query: retrieve relevant chunks and generate answer
+5. rag_query(collection, query, n_chunks = 2): Perform RAG query: retrieve relevant chunks and generate an answer
 
 
 ## How to run streamlit app
-first we use cd to project folder then we run python by inserting in terminal
+First, we use cd to change the directory to the project folder then run the main.py file to create a vector database
+```bash
+python3 main.p
+```
+Second, we run rag-API.py to start connecting to the vector database and connecting to ChatGPT 4o mini-chat
 ```bash
 python3 API/rag-API.py
 ```
-and then we run streamlit app through terminal
+and then we run Streamlit app through terminal
 ```bash
 streamlit run J:\..\Hospital_Prompting_system_RAG\Stream-app.py
 ```
 
 
-## how to insert data to database
-there's API for each table to insert data run the API for the table you want to add record at and there's a html file to easy interface with the API in 127.0.0.1:5000
+## How to insert data into the database
+there's an API for each table to insert data run the API for the table you want to add a record at and there's an HTML file to easily interface with the API at 127.0.0.1:5000
+example: inserting data to physician table we run physician-API.py
+```bash
+python3 API/physician-API.py
+```
 
 ```bash
 python3 API/Schedules.py
