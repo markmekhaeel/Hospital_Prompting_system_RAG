@@ -100,6 +100,3 @@ example: inserting data to physician table we run physician-API.py
 python3 API/physician-API.py
 ```
 
-```bash
-python3 API/Schedules.py
-```
