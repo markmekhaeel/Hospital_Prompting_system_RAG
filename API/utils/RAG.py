@@ -34,7 +34,7 @@ def get_context_combined(results):
 def get_prompt(context, query):
     '''Generate a prompt combining context and query'''
 
-    prompt = f'''Based on the following context and conversation history, 
+    prompt = f'''Based on the following context, 
     please provide a relevant and contextual response. If the answer cannot 
     be derived from the context, only use the conversation history or say 
     "I cannot answer this based on the provided information."
